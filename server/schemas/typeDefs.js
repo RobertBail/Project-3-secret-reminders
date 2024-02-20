@@ -1,4 +1,12 @@
 const typeDefs = `
+type User {
+  _id: ID
+  username: String
+  email: String
+  password: String
+  reminders: [Reminder]!
+}
+
   type Reminder {
     _id: ID
     reminderText: String
@@ -11,6 +19,10 @@ const typeDefs = `
     _id: ID
     commentText: String
     createdAt: String
+  }
+  type Auth {
+    token: ID!
+    user: User
   }
 
   type Query {

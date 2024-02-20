@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 const ReminderList = ({ reminders, title }) => {
   if (!reminders.length) {
-    return <h3>No Secret Reminders Yet</h3>;
+    return <h3>Please signup/login to begin...</h3>;
   }
 
   return (

@@ -56,7 +56,7 @@ const ReminderForm = () => {
 
   return (
     <div>
-      <h3>What's on your techy mind?</h3>
+      <h3>Add new reminder:</h3>
 
       <p
         className={`m-0 ${
@@ -64,7 +64,7 @@ const ReminderForm = () => {
         }`}
       >
         Character Count: {characterCount}/280
-        {error && <span className="ml-2">Something went wrong...</span>}
+        {error && <span className="ml-2">Please signup/login to add...</span>}
       </p>
       <form
         className="flex-row justify-center justify-space-between-md align-center"
@@ -96,7 +96,7 @@ const ReminderForm = () => {
         </div>
         {error && (
           <div className="col-12 my-3 bg-danger text-white p-3">
-            Something went wrong...
+            Please signup/login to add...
           </div>
         )}
       </form>
