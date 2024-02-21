@@ -3,6 +3,18 @@ const { signToken, AuthenticationError } = require('../utils/auth');
 
 const resolvers = {
   Query: {
+    me: async (parent, args, context) => {
+      if (context.user) {
+        return User.findOne({ _id: context.user._id }).select('-__v -password');
+      }
+      throw AuthenticationError;
+    },
+   // users: async () => {
+    //  return User.find().populate('reminders');
+   // }, remember update users: [User] in typeDefs
+    user: async (parent, { username }) => {
+      return User.findOne({ username }).populate('reminders');
+    },
 
     reminders: async () => {
       return Reminder.find().sort({ createdAt: -1 });
@@ -11,12 +23,7 @@ const resolvers = {
     reminder: async (parent, { reminderId }) => {
       return Reminder.findOne({ _id: reminderId });
     },
-    me: async (parent, args, context) => {
-      if (context.user) {
-        return User.findOne({ _id: context.user._id }).populate('reminders');
-      }
-      throw AuthenticationError;
-    },
+  
   },
 
   Mutation: {
@@ -57,7 +64,7 @@ const resolvers = {
         return reminder;
       }
       throw AuthenticationError;
-      ('You need to be logged in!');
+    
     },
 
     addComment: async (parent, { reminderId, commentText }, context) => {

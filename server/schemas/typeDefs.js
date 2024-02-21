@@ -27,8 +27,10 @@ type User {
 
   type Query {
     me: User
+    user(username: String!): User
     reminders: [Reminder]!
     reminder(reminderId: ID!): Reminder
+    
   }
 
   type Mutation {
