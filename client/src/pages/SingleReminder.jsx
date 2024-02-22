@@ -12,8 +12,8 @@ const SingleReminder  = () => {
   const { reminderId } = useParams();
 
   const { loading, data } = useQuery(QUERY_SINGLE_REMINDER, {
-    // Pass the `thoughtId` URL parameter into query to retrieve this thought's data
-    variables: { reminderId: reminderId },
+    // Pass the `reminderId` URL parameter into query to retrieve this reminder's data
+    variables: { reminderId: reminderId }
   });
 
   const reminder = data?.reminder || {};
@@ -24,7 +24,7 @@ const SingleReminder  = () => {
   return (
     <div className="my-3">
       <h3 className="card-header bg-dark text-light p-2 m-1">
-        
+     
         <span >
           A reminder created on {reminder.createdAt} about: 
         </span>

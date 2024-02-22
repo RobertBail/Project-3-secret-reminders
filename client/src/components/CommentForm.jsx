@@ -6,7 +6,13 @@ import { ADD_COMMENT } from '../utils/mutations';
 import Auth from '../utils/auth';
 
 const CommentForm = ({ reminderId }) => {
-  const [commentText, setCommentText] = useState('');
+  const [formState, setFormState] = useState({
+    reminderId, 
+  commentText: '',
+  //createdAt
+  //commentAuthor: Auth.getProfile().authenticatedPerson.username
+ });
+ // const [commentText, setCommentText] = useState('');
   const [characterCount, setCharacterCount] = useState(0);
 
   const [addComment, { error }] = useMutation(ADD_COMMENT);
@@ -16,10 +22,15 @@ const CommentForm = ({ reminderId }) => {
 
     try {
       const { data } = await addComment({
-        variables: { reminderId, commentText },
+        variables: { ...formState
+        //  reminderId, 
+         // commentText,
+         // commentAuthor: Auth.getProfile().authenticatedPerson.username
+         },
       });
-
-      setCommentText('');
+      setCharacterCount(0);
+      setFormState ({reminderId, commentText: ''});
+      //setCommentText('');
     } catch (err) {
       console.error(err);
     }
@@ -29,7 +40,8 @@ const CommentForm = ({ reminderId }) => {
     const { name, value } = event.target;
 
     if (name === 'commentText' && value.length <= 280) {
-      setCommentText(value);
+      //setCommentText(value);
+      setFormState({ ...formState, [name]: value });
       setCharacterCount(value.length);
     }
   };
@@ -56,7 +68,7 @@ const CommentForm = ({ reminderId }) => {
           <textarea
             name="commentText"
             placeholder="Add your comment..."
-            value={commentText}
+            value={formState.commentText}
             className="form-input w-100"
             style={{ lineHeight: '1.5' }}
             onChange={handleChange}

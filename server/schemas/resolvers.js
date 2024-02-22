@@ -89,8 +89,7 @@ const resolvers = {
       if (context.user) {
         const reminder = await Reminder.findOneAndDelete({
           _id: reminderId,
-          reminderText,
-          reminderAbout,
+         
         });
 
         await User.findOneAndUpdate(
@@ -111,7 +110,7 @@ const resolvers = {
             $pull: {
               comments: {
                 _id: commentId,
-                commentText,
+               
               },
             },
           },
