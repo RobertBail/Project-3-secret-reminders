@@ -1,14 +1,17 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 
-import { ADD_REMINDER } from '../../utils/mutations';
-import { QUERY_REMINDERS } from '../../utils/queries';
+import { ADD_REMINDER } from '../utils/mutations';
+import { QUERY_REMINDERS, QUERY_ME } from '../utils/queries';
+import Auth from '../utils/auth';
 
 const ReminderForm = () => {
   const [formState, setFormState] = useState({
-    reminderText: '',
-    reminderAbout: '',
-  });
+  reminderText: '',
+  reminderAbout: '',
+ });
+ //const [reminderText, setReminderText, reminderAbout] = useState('');
   const [characterCount, setCharacterCount] = useState(0);
 
   // Set up the mutation with error handling support.
@@ -18,7 +21,10 @@ const ReminderForm = () => {
   (ADD_REMINDER, {
     refetchQueries: [
       QUERY_REMINDERS,
-      'getReminders'
+      'getReminders',
+      QUERY_ME,
+      'me'
+
     ]
   });
 
@@ -54,17 +60,19 @@ const ReminderForm = () => {
     }
   };
 
+
   return (
     <div>
       <h3>Add new reminder:</h3>
-
+      {Auth.loggedIn() ? (
+         <>
       <p
-        className={`m-0 ${
+        className={`m-1 ${
           characterCount === 280 || error ? 'text-danger' : ''
         }`}
       >
         Character Count: {characterCount}/280
-        {error && <span className="ml-2">Please signup/login to add...</span>}
+       
       </p>
       <form
         className="flex-row justify-center justify-space-between-md align-center"
@@ -73,7 +81,7 @@ const ReminderForm = () => {
         <div className="col-12">
           <textarea
             name="reminderText"
-            placeholder="This is a new reminder..."
+            placeholder="Enter a new reminder..."
             value={formState.reminderText}
             className="form-input w-100"
             onChange={handleChange}
@@ -100,6 +108,14 @@ const ReminderForm = () => {
           </div>
         )}
       </form>
+         </>
+         ) : (
+           <p>
+             You need to be logged in to access. Please{' '}
+             <Link to="/">login</Link> or <Link to="/">signup.</Link>
+           </p>
+         )}
+   
     </div>
   );
 };

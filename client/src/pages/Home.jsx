@@ -1,35 +1,51 @@
 import { useQuery } from "@apollo/client";
-
-import ReminderList from "../components/ReminderList";
-import ReminderForm from "../components/ReminderForm";
-
-import { QUERY_REMINDERS } from "../utils/queries";
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { Nav, Container, Modal, Tab } from 'react-bootstrap';
+import SignupForm from '../components/SignupForm';
+import LoginForm from '../components/LoginForm';
 
 const Home = () => {
-  const { loading, data } = useQuery(QUERY_REMINDERS);
-
-  const reminders = data?.reminders || [];
+  const [showModal, setShowModal] = useState(true);
 
   return (
     <main>
-      <div className="flex-row justify-center">
-        <div
-          className="col-12 col-md-10 mb-3 p-3"
-          style={{ border: "1px dotted #1a1a1a" }}
-        >
-          <ReminderForm />
-        </div>
-        <div className="col-12 col-md-8 mb-3">
-          {loading ? (
-            <div>Loading...</div>
-          ) : (
-            <ReminderList
-              reminders={reminders}
-              title="Some Secret Reminder(s)..."
-            />
-          )}
-        </div>
-      </div>
+      <Container >
+  <Modal
+        size='lg'
+        show={showModal}
+        onHide={() => setShowModal(true)}
+        aria-labelledby='signup-modal'>
+        {/* tab container to do either signup or login component */}
+        <Tab.Container defaultActiveKey='login'>
+          <Modal.Header closeButton>
+            <Modal.Title id='signup-modal'>
+              <Nav variant='pills'>
+              <Nav.Item >
+                Welcome to Secret Reminders...
+              </Nav.Item>
+                <Nav.Item>
+                  <Nav.Link eventKey='login'>Login</Nav.Link>
+                </Nav.Item>
+                <Nav.Item>
+                  <Nav.Link eventKey='signup'>Sign Up</Nav.Link>
+                </Nav.Item>
+              </Nav>
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Tab.Content>
+              <Tab.Pane eventKey='login'>
+                <LoginForm handleModalClose={() => setShowModal(true)} />
+              </Tab.Pane>
+              <Tab.Pane eventKey='signup'>
+                <SignupForm handleModalClose={() => setShowModal(true)} />
+              </Tab.Pane>
+            </Tab.Content>
+          </Modal.Body>
+        </Tab.Container>
+       </Modal>
+     </Container>
     </main>
   );
 };

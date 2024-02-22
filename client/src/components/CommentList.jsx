@@ -18,7 +18,7 @@ const CommentList = ({ comments = [] }) => {
             <div key={comment._id} className="col-12 mb-3 pb-3">
               <div className="p-3 bg-dark text-light">
                 <h5 className="card-header">
-                  An anonymous user commented{' '}
+                  Comment created{' '}
                   <span style={{ fontSize: '0.825rem' }}>
                     on {comment.createdAt}
                   </span>

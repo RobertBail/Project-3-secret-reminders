@@ -21,7 +21,7 @@ export const ADD_USER = gql`
         _id
         username
         email
-        reminders
+       
       }
     }
   }
@@ -37,6 +37,7 @@ export const ADD_REMINDER = gql`
       comments {
         _id
         commentText
+        createdAt
       }
     }
   }

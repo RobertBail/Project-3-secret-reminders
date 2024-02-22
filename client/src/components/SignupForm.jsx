@@ -40,6 +40,11 @@ const SignupForm = () => {
       console.error(err);
       setShowAlert(true);
     }
+    setFormState({
+      username: '',
+      email: '',
+      password: '',
+    });
 
    // setUserFormData({
     //  username: '',

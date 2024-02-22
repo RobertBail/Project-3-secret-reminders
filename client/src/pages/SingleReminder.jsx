@@ -23,10 +23,10 @@ const SingleReminder  = () => {
   }
   return (
     <div className="my-3">
-      <h3 className="card-header bg-dark text-light p-2 m-0">
+      <h3 className="card-header bg-dark text-light p-2 m-1">
         
-        <span style={{ fontSize: '1rem' }}>
-          A reminder created on {reminder.createdAt} about:
+        <span >
+          A reminder created on {reminder.createdAt} about: 
         </span>
         {reminder.reminderAbout} <br />
       </h3>

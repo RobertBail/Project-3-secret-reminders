@@ -1,7 +1,9 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 
-import { ADD_COMMENT } from '../../utils/mutations';
+import { ADD_COMMENT } from '../utils/mutations';
+import Auth from '../utils/auth';
 
 const CommentForm = ({ reminderId }) => {
   const [commentText, setCommentText] = useState('');
@@ -35,8 +37,11 @@ const CommentForm = ({ reminderId }) => {
   return (
     <div>
       <h4>Any comments on this reminder?</h4>
+      {Auth.loggedIn() ? (
+        <>
+
       <p
-        className={`m-0 ${
+        className={`m-1 ${
           characterCount === 280 || error ? 'text-danger' : ''
         }`}
       >
@@ -64,6 +69,14 @@ const CommentForm = ({ reminderId }) => {
           </button>
         </div>
       </form>
+      </>
+      ) : (
+        <p>
+          You need to be logged in to access. Please{' '}
+          <Link to="/">login</Link> or <Link to="/">signup.</Link>
+        </p>
+      )}
+
     </div>
   );
 };

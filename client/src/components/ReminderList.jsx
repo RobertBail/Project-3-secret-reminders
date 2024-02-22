@@ -1,18 +1,23 @@
 import { Link } from 'react-router-dom';
+import { useQuery } from "@apollo/client";
+import { QUERY_REMINDERS } from "../utils/queries";
 
-const ReminderList = ({ reminders, title }) => {
+const ReminderList = () => {
+  const { loading, data } = useQuery(QUERY_REMINDERS);
+  const reminders = data?.reminders || [];
+
   if (!reminders.length) {
-    return <h3>Please signup/login to begin...</h3>;
-  }
+  return <h3>Your Secret Reminders...</h3>;
+ }
 
   return (
     <div>
-      <h3>{title}</h3>
+      
       {reminders &&
         reminders.map((reminder) => (
           <div key={reminder._id} className="card mb-3">
-            <h4 className="card-header bg-primary text-light p-2 m-0">
-            <span style={{ fontSize: '1rem' }}>
+            <h4 className="card-header bg-primary text-light p-2 m-1">
+            <span >
              A reminder created on {reminder.createdAt} about:
             </span>
             {reminder.reminderAbout} <br />
