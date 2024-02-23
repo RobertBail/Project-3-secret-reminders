@@ -51,10 +51,40 @@ export const ADD_COMMENT = gql`
       reminderAbout
       createdAt
       comments {
+        commentText
+        _id
+        createdAt
+      }
+    }
+  }
+`;
+
+export const REMOVE_REMINDER  = gql`
+  mutation removeReminder($reminderId: String!) {
+    removeReminder(reminderId: $reminderId) {
+      _id
+      reminderText
+      reminderAbout
+      createdAt
+      comments {
         _id
         commentText
         createdAt
       }
+    }
+  }
+`;
+
+export const REMOVE_COMMENT  = gql`
+  mutation  removeComment($commentId: String!) {
+    removeComment(commentId: $commentId) {
+      _id
+      comments {
+        _id
+        commentText
+        createdAt
+      }
+    
     }
   }
 `;

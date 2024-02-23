@@ -1,6 +1,14 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
+import {
+  Container,
+  Card,
+  Button,
+  Form,
+  Row,
+  Col
+} from 'react-bootstrap';
 
 import { ADD_COMMENT } from '../utils/mutations';
 import Auth from '../utils/auth';
@@ -8,8 +16,8 @@ import Auth from '../utils/auth';
 const CommentForm = ({ reminderId }) => {
   const [formState, setFormState] = useState({
     reminderId, 
-  commentText: '',
-  //createdAt
+   commentText: '',
+ // createdAt
   //commentAuthor: Auth.getProfile().authenticatedPerson.username
  });
  // const [commentText, setCommentText] = useState('');
@@ -29,7 +37,8 @@ const CommentForm = ({ reminderId }) => {
          },
       });
       setCharacterCount(0);
-      setFormState ({reminderId, commentText: ''});
+      //setFormState ({reminderId, commentText: ''});
+      setFormState ({ commentText: ''});
       //setCommentText('');
     } catch (err) {
       console.error(err);
@@ -75,11 +84,11 @@ const CommentForm = ({ reminderId }) => {
           ></textarea>
         </div>
 
-        <div className="col-12 col-lg-3">
+        
           <button className="btn btn-primary btn-block py-3" type="submit">
             Add Comment
           </button>
-        </div>
+        
       </form>
       </>
       ) : (

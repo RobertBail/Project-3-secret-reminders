@@ -1,6 +1,13 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useMutation } from '@apollo/client';
+import { useQuery, useMutation } from '@apollo/client';
+import {
+  Container,
+  Card,
+  Button,
+  Row,
+  Col
+} from 'react-bootstrap';
 
 import { ADD_REMINDER } from '../utils/mutations';
 import { QUERY_REMINDERS, QUERY_ME } from '../utils/queries';
@@ -97,11 +104,11 @@ const ReminderForm = () => {
           />
         </div>
 
-        <div className="col-12 col-lg-3">
+        
           <button className="btn btn-primary btn-block py-3" type="submit">
             Add Secret Reminder
           </button>
-        </div>
+        
         {error && (
           <div className="col-12 my-3 bg-danger text-white p-3">
             Please signup/login to add...

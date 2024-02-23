@@ -5,6 +5,13 @@ import {
   ApolloProvider,
   createHttpLink,
 } from '@apollo/client';
+import {
+  Container,
+  Card,
+  Button,
+  Row,
+  Col
+} from 'react-bootstrap';
 import { setContext } from '@apollo/client/link/context';
 import { Outlet } from 'react-router-dom';
 

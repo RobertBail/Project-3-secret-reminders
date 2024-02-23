@@ -1,11 +1,19 @@
 // Import the `useParams()` hook from React Router
 import { useParams } from 'react-router-dom';
-import { useQuery } from '@apollo/client';
+import { useQuery, useMutation } from "@apollo/client";
+import {
+  Container,
+  Card,
+  Button,
+  Row,
+  Col
+} from 'react-bootstrap';
 
 import CommentList from '../components/CommentList';
 import CommentForm from '../components/CommentForm';
 
 import { QUERY_SINGLE_REMINDER } from '../utils/queries';
+import { REMOVE_REMINDER, ADD_COMMENT, REMOVE_COMMENT } from '../utils/mutations';
 
 const SingleReminder  = () => {
   // Use `useParams()` to retrieve value of the route parameter `:profileId`
@@ -17,9 +25,32 @@ const SingleReminder  = () => {
   });
 
   const reminder = data?.reminder || {};
+  const {deleteReminder} = useMutation(REMOVE_REMINDER)
+  const handleDeleteReminder = async ( reminderId) => {
+    
+    const token = Auth.loggedIn() ? Auth.getToken() : null;
+
+    if (!token) {
+      return false;
+    }
+
+    try {
+      const response = await deleteReminder({
+        variables: { reminderId },
+      });
+
+    if (!response.ok) {
+      throw new Error('something went wrong!');
+    }
+    deleteReminder(reminderId);
+  
+  } catch (err) {
+    console.error(err);
+  }
+};
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div class="m-1">Loading...</div>;
   }
   return (
     <div className="my-3">
@@ -42,6 +73,7 @@ const SingleReminder  = () => {
         >
           {reminder.reminderText}
         </blockquote>
+       
       </div>
 
       <div className="my-5">

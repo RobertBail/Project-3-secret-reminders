@@ -1,8 +1,14 @@
 import { Navigate, useParams } from 'react-router-dom';
-import { useQuery } from "@apollo/client";
+import { useQuery, useMutation } from "@apollo/client";
 import ReminderList from "../components/ReminderList";
 import ReminderForm from "../components/ReminderForm";
-
+import {
+  Container,
+  Card,
+  Button,
+  Row,
+  Col
+} from 'react-bootstrap';
 
 import { QUERY_USER, QUERY_ME, QUERY_REMINDERS } from '../utils/queries';
 
@@ -20,8 +26,10 @@ const ProfileReminders = () => {
   const { loading, data } = useQuery(userParam ? QUERY_USER : QUERY_ME, {
     variables: { username: userParam }, QUERY_REMINDERS
   });
-
+  
   const user = data?.me || data?.user || {};
+
+
   // navigate to personal profile page if username is yours
   if (Auth.loggedIn() && Auth.getProfile().data.username === userParam) {
     return <Navigate to="/me" />;

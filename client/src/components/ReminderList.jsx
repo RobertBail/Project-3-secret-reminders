@@ -1,18 +1,52 @@
 import { Link } from 'react-router-dom';
-import { useQuery } from "@apollo/client";
+import { useQuery, useMutation } from "@apollo/client";
+import {
+  Container,
+  Card,
+  Button,
+  Row,
+  Col
+} from 'react-bootstrap';
 import { QUERY_REMINDERS, QUERY_SINGLE_REMINDER  } from "../utils/queries";
+import { REMOVE_REMINDER, ADD_COMMENT, REMOVE_COMMENT } from '../utils/mutations';
 import CommentForm from './CommentForm';
 import CommentList from './CommentList';
+import Auth from '../utils/auth';
 
 const ReminderList = () => {
   const { loading, data } = useQuery(QUERY_REMINDERS, QUERY_SINGLE_REMINDER );
+  const {deleteReminder} = useMutation(REMOVE_REMINDER)
   const reminders = data?.reminders || [];
+
+  const handleDeleteReminder = async ( reminderId) => {
+    
+   const token = Auth.loggedIn() ? Auth.getToken() : null;
+
+    if (!token) {
+     return false;
+    }
+
+    try {
+    const response = await deleteReminder({
+        variables: { reminderId },
+      });
+
+   if (!response.ok) {
+      throw new Error('something went wrong!');
+    }
+   deleteReminder(reminderId);
+  
+  } catch (err) {
+   console.error(err);
+  }
+};
 
   if (!reminders.length) {
   return <h3>Your Secret Reminders...</h3>;
  }
 
   return (
+    <>
     <div>
       
       {reminders &&
@@ -26,14 +60,11 @@ const ReminderList = () => {
             </h4>
             <div className="card-body bg-light p-2">
               <p>{reminder.reminderText}</p>
+              <Button className='btn-block btn-danger' onClick={() => handleDeleteReminder(reminder.reminder._id)}>
+                      Delete reminder
+              </Button>
             </div>
-            <Link
-              className="btn btn-primary btn-block btn-squared"
-              to={`/reminders/${reminder._id}`}
-              
-            >
-              Add a comment to this reminder...
-            </Link>
+            
             <div className="my-5">
         <CommentList reminderId={reminder.comments} />
       </div>
@@ -43,6 +74,7 @@ const ReminderList = () => {
           </div>
         ))}
     </div>
+    </>
   );
 };
 
