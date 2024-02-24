@@ -9,11 +9,11 @@ import {
   Col
 } from 'react-bootstrap';
 
-import CommentList from '../components/CommentList';
-import CommentForm from '../components/CommentForm';
+//import CommentList from '../components/CommentList';
+//import CommentForm from '../components/CommentForm';
 
-import { QUERY_SINGLE_REMINDER } from '../utils/queries';
-import { REMOVE_REMINDER, ADD_COMMENT, REMOVE_COMMENT } from '../utils/mutations';
+//import { QUERY_SINGLE_REMINDER } from '../utils/queries';
+//import { REMOVE_REMINDER, ADD_COMMENT, REMOVE_COMMENT } from '../utils/mutations';
 
 const SingleReminder  = () => {
   // Use `useParams()` to retrieve value of the route parameter `:profileId`
@@ -25,29 +25,29 @@ const SingleReminder  = () => {
   });
 
   const reminder = data?.reminder || {};
-  const {deleteReminder} = useMutation(REMOVE_REMINDER)
-  const handleDeleteReminder = async ( reminderId) => {
+//  const {deleteReminder} = useMutation(REMOVE_REMINDER)
+  //const handleDeleteReminder = async ( reminderId) => {
     
-    const token = Auth.loggedIn() ? Auth.getToken() : null;
+    //const token = Auth.loggedIn() ? Auth.getToken() : null;
 
-    if (!token) {
-      return false;
-    }
+   // if (!token) {
+     // return false;
+   // }
 
-    try {
-      const response = await deleteReminder({
-        variables: { reminderId },
-      });
+   // try {
+    //  const response = await deleteReminder({
+    //    variables: { reminderId },
+     // });
 
-    if (!response.ok) {
-      throw new Error('something went wrong!');
-    }
-    deleteReminder(reminderId);
+  //  if (!response.ok) {
+ //     throw new Error('something went wrong!');
+  //  }
+  //  deleteReminder(reminderId);
   
-  } catch (err) {
-    console.error(err);
-  }
-};
+ // } catch (err) {
+  //  console.error(err);
+ // }
+//};
 
   if (loading) {
     return <div class="m-1">Loading...</div>;

@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useQuery, useMutation } from "@apollo/client";
 import {
   Container,
@@ -14,11 +15,14 @@ import CommentList from './CommentList';
 import Auth from '../utils/auth';
 
 const ReminderList = () => {
-  const { loading, data } = useQuery(QUERY_REMINDERS, QUERY_SINGLE_REMINDER );
-  const {deleteReminder} = useMutation(REMOVE_REMINDER)
+  const { reminderId } = useParams();
+  const { loading, data } = useQuery(QUERY_REMINDERS, QUERY_SINGLE_REMINDER,
+    
+     );
+  const {removeReminder} = useMutation(REMOVE_REMINDER)
   const reminders = data?.reminders || [];
 
-  const handleDeleteReminder = async ( reminderId) => {
+  const handleDeleteReminder = async ( _id) => {
     
    const token = Auth.loggedIn() ? Auth.getToken() : null;
 
@@ -27,21 +31,21 @@ const ReminderList = () => {
     }
 
     try {
-    const response = await deleteReminder({
-        variables: { reminderId },
+    const response = await removeReminder({
+        variables: { _id },
       });
 
    if (!response.ok) {
       throw new Error('something went wrong!');
     }
-   deleteReminder(reminderId);
+    removeReminder(_id);
   
   } catch (err) {
    console.error(err);
   }
 };
 
-  if (!reminders.length) {
+  if (loading) {
   return <h3>Your Secret Reminders...</h3>;
  }
 
@@ -60,16 +64,16 @@ const ReminderList = () => {
             </h4>
             <div className="card-body bg-light p-2">
               <p>{reminder.reminderText}</p>
-              <Button className='btn-block btn-danger' onClick={() => handleDeleteReminder(reminder.reminder._id)}>
+              <Button className='btn-block btn-danger' onClick={() => handleDeleteReminder(reminder._id)}>
                       Delete reminder
               </Button>
             </div>
-            
-            <div className="my-5">
-        <CommentList reminderId={reminder.comments} />
-      </div>
-            <div className="m-3 p-4" style={{ border: '1px dotted #1a1a1a' }}>
+         
+      <div className="m-3 p-4" style={{ border: '1px dotted #1a1a1a' }}>
         <CommentForm reminderId={reminder._id} />
+      </div>
+      <div className="my-5">
+        <CommentList comments={reminder._id} />
       </div>
           </div>
         ))}

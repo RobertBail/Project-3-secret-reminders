@@ -41,11 +41,7 @@ export const QUERY_REMINDERS = gql`
       reminderText
       reminderAbout
       createdAt
-      comments {
-        _id
-        commentText
-        createdAt
-      }
+      
     }
   }
 `;

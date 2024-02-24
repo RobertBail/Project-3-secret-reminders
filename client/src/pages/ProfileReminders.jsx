@@ -10,7 +10,7 @@ import {
   Col
 } from 'react-bootstrap';
 
-import { QUERY_USER, QUERY_ME, QUERY_REMINDERS } from '../utils/queries';
+import { QUERY_USER, QUERY_ME, QUERY_REMINDERS, QUERY_SINGLE_REMINDER  } from '../utils/queries';
 
 import Auth from '../utils/auth';
 
@@ -24,8 +24,8 @@ const ProfileReminders = () => {
 
   //const reminders = data?.reminders || [];
   const { loading, data } = useQuery(userParam ? QUERY_USER : QUERY_ME, {
-    variables: { username: userParam }, QUERY_REMINDERS
-  });
+    variables: { username: userParam }
+  }, QUERY_REMINDERS, QUERY_SINGLE_REMINDER );
   
   const user = data?.me || data?.user || {};
 

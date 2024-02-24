@@ -22,7 +22,7 @@ const Home = () => {
             <Modal.Title id='signup-modal'>
               <Nav variant='pills'>
               <Nav.Item >
-                Welcome to Secret Reminders...
+                Welcome to Secret Reminders... 
               </Nav.Item>
                 <Nav.Item>
                   <Nav.Link eventKey='login'>Login</Nav.Link>
