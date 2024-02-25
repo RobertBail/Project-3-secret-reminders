@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 
 import App from './App.jsx'
 import Home from './pages/Home'
-import ProfileReminders from './pages/ProfileReminders.jsx'
+import ProfileReminders from './pages/ProfileReminders'
 //import SingleReminder from './pages/SingleReminder'
 import Error from './pages/Error'
 
@@ -22,10 +22,10 @@ const router = createBrowserRouter([
         path: '/reminders',
         element: <ProfileReminders />,
       },
-     // {
-     //   path: '/reminders/:reminderId',
-     //   element: <SingleReminder />,
-     // },
+      //{
+    //   path: '/reminders/:reminderId',
+    //    element: <SingleReminder />,
+    // },
     ],
   },
 ]);
