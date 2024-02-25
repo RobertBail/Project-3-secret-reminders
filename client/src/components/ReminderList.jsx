@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { useParams } from 'react-router-dom';
+//import { useParams } from 'react-router-dom';
 import { useQuery, useMutation } from "@apollo/client";
 import {
   Container,
@@ -15,7 +15,7 @@ import CommentList from './CommentList';
 import Auth from '../utils/auth';
 
 const ReminderList = () => {
-  const { reminderId } = useParams();
+ // const { reminderId } = useParams();
   const { loading, data } = useQuery(QUERY_REMINDERS, QUERY_SINGLE_REMINDER,
     
      );
@@ -68,13 +68,16 @@ const ReminderList = () => {
                       Delete reminder
               </Button>
             </div>
-         
+          
       <div className="m-3 p-4" style={{ border: '1px dotted #1a1a1a' }}>
         <CommentForm reminderId={reminder._id} />
+        </div>
+        <div className="my-5">
+        <CommentList comments={reminder.comments} 
+        title={`Additional comments...`}
+        showTitle={true}/>
       </div>
-      <div className="my-5">
-        <CommentList comments={reminder._id} />
-      </div>
+       
           </div>
         ))}
     </div>

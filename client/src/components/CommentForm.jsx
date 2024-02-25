@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import {
@@ -14,11 +15,12 @@ import { ADD_COMMENT } from '../utils/mutations';
 import Auth from '../utils/auth';
 
 const CommentForm = ({ reminderId }) => {
+  const { username: userParam } = useParams();
   const [formState, setFormState] = useState({
     reminderId, 
    commentText: '',
- // createdAt
-  //commentAuthor: Auth.getProfile().authenticatedPerson.username
+  //createdAt,
+  commentAuthor: Auth.loggedIn() && Auth.getProfile().data.username === userParam
  });
  // const [commentText, setCommentText] = useState('');
   const [characterCount, setCharacterCount] = useState(0);
@@ -33,7 +35,7 @@ const CommentForm = ({ reminderId }) => {
         variables: { ...formState
         //  reminderId, 
          // commentText,
-         // commentAuthor: Auth.getProfile().authenticatedPerson.username
+         // commentAuthor: 
          },
       });
       setCharacterCount(0);

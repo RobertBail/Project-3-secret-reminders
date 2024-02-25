@@ -89,7 +89,7 @@ const resolvers = {
       if (context.user) {
         const reminder = await Reminder.findOneAndDelete({
           _id: reminderId,
-         
+          reminderAbout
         });
 
         await User.findOneAndUpdate(
