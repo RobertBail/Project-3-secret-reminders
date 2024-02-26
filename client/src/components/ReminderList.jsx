@@ -15,10 +15,11 @@ import CommentList from './CommentList';
 import Auth from '../utils/auth';
 
 const ReminderList = () => {
-  const { username: userParam } = useParams();
-  const { loading, data } = useQuery(QUERY_REMINDERS, QUERY_SINGLE_REMINDER,
-    
-     );
+  const { reminderId } = useParams();
+  const { loading, data } = useQuery(QUERY_REMINDERS, QUERY_SINGLE_REMINDER,{
+      // pass URL parameter
+      variables: { reminderId: reminderId },
+    });
   const {removeReminder} = useMutation(REMOVE_REMINDER)
   const reminders = data?.reminders || [];
 
@@ -68,11 +69,11 @@ const ReminderList = () => {
                       Delete reminder
               </Button>
             </div>
-         {!userParam && ( 
+         
       <div className="m-3 p-4" style={{ border: '1px dotted #1a1a1a' }}>
         <CommentForm reminderId={reminder._id} />
         </div>
-        )}
+       
         <div className="my-5">
         <CommentList comments={reminder.comments} 
         title={`Additional comments...`}

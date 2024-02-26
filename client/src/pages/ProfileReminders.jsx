@@ -28,11 +28,10 @@ const ProfileReminders = () => {
   }, QUERY_REMINDERS, QUERY_SINGLE_REMINDER );
   
   const user = data?.me || data?.user || {};
-
-
   // navigate to personal profile page if username is yours
   if (Auth.loggedIn() && Auth.getProfile().data.username === userParam) {
-    return <Navigate to="/me" />;
+    //return <Navigate to="/me" />;
+    return <Navigate to="/reminders" />;                    
   }
 
   if (loading) {
@@ -52,7 +51,7 @@ const ProfileReminders = () => {
     <div>
       <div className="flex-row justify-center mb-3">
         <h2 className="col-12 col-md-10 bg-dark text-light p-3 mb-5">
-          Viewing {userParam ? `${user.username}'s` : 'your'} profile.
+          Viewing {userParam ? `${user.username}'s` : 'your'} profile...
         </h2>
         {!userParam && (
           <div
