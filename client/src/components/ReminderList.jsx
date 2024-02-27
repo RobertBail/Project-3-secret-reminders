@@ -70,11 +70,11 @@ const ReminderList = () => {
               </Button>
             </div>
          
-      <div className="m-3 p-4" style={{ border: '1px dotted #1a1a1a' }}>
+      <div className="m-3 p-4" style={{ border: '4px solid #6aafa8' }}>
         <CommentForm reminderId={reminder._id} />
         </div>
        
-        <div className="my-5">
+        <div className="col-12 col-md-10 mb-5">
         <CommentList comments={reminder.comments} 
         title={`Additional comments...`}
         showTitle={true}/>

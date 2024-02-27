@@ -12,10 +12,10 @@ const AppNavbar = () => {
 
   return (
     <>
-      <Navbar class="navbar navbar-expand-lg navbar-light m-1">
+      <Navbar class="navbar navbar-expand-lg">
         <Container fluid>
-          <Navbar.Brand class="navbar navbar-expand-lg m-1">
-            <strong>Secret Reminders: Remind yourself of secrets and keep track of them...</strong>
+          <Navbar.Brand class="navbar-brand">
+            <strong>Secret Reminders: remind yourself of secrets and keep track of them...</strong>
           </Navbar.Brand>
           <Navbar.Toggle aria-controls='navbar' />
           <Navbar.Collapse id='navbar' className='d-flex flex-row-reverse'>

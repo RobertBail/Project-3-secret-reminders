@@ -19,6 +19,7 @@
  */
 body {
   margin: 0;
+  background-color: #e5f0ee;
 }
 
 /**
@@ -28,12 +29,16 @@ main {
   display: block;
 }
 
+.navbar-brand {
+  font-size: 30px;
+  color:#2d3e50
+}
 /**
  * Correct the font size and margin on `h1` elements within `section` and
  * `article` contexts in Chrome, Firefox, and Safari.
  */
 h1 {
-  font-size: 50px;
+  
   margin: 0.67em 0;
 }
 
@@ -426,8 +431,8 @@ a {
 }
 
 a:hover {
-  color: #065b83;
-  text-decoration: underline;
+  color: #0f465f;
+  
 }
 
 /* HEIGHT / WIDTH UTILS */
@@ -459,17 +464,18 @@ a:hover {
 /* Margin - all sides */
 .m-0 {
   margin: 0 !important;
-  font-size: 50px;
+  font-size: 70px;
 }
 
 
 .m-1 {
   margin: 0.375rem !important;
-  font-size: 20px;
+  font-size: 25px;
 }
 
 .m-2 {
   margin: 0.625rem !important;
+  font-size: 25px;
 }
 
 .m-3 {
@@ -1089,18 +1095,20 @@ a:hover {
 }
 
 .card {
-  border: 1px solid #1a1a1a;
+  border-style: none;
   margin-bottom: 1rem;
+  background-color: #ffffff;
 }
 
 .card .card-header {
   padding: 0.375rem;
   background-color: #2d3e50;
-  color: #d9e9e8;
+
 }
 
 .card .card-body {
   padding: 0.375rem;
+  background-color: #ffffff;
 }
 
 .card .card-footer {
